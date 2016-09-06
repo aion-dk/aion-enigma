@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    enigma (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.9.0)
+    rake (11.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  enigma!
+  minitest (~> 5.9)
+  rake (~> 11.2)
+
+BUNDLED WITH
+   1.12.5

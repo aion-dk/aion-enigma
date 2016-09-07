@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = 'enigma'
+  s.name        = 'aion-enigma'
   s.version     = '0.0.1'
   s.date        = '2016-09-06'
   s.summary     = 'Encryption utility based on AES'

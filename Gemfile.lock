@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    enigma (0.0.1)
+    aion-enigma (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -13,7 +13,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  enigma!
+  aion-enigma!
   minitest (~> 5.9)
   rake (~> 11.2)
 

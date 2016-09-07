@@ -8,7 +8,7 @@ Install
 
 Install gem via git
 ```
-gem 'enigma', git: 'git@github.com:aion-dk/enigma'
+gem 'aion-enigma'
 ```
 
 Usage

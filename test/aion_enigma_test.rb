@@ -1,16 +1,16 @@
 require 'minitest/autorun'
-require 'enigma'
+require 'aion_enigma'
 
-class EnigmaTest < Minitest::Test
+class AionEnigmaTest < Minitest::Test
 
   def setup
     @secret = 'some shared secret'
-    @enigma = Enigma.new(@secret)
+    @enigma = AionEnigma.new(@secret)
   end
 
   def test_non_string_secret
     assert_raises ArgumentError do
-      Enigma.new({})
+      AionEnigma.new({})
     end
   end
 
@@ -50,8 +50,8 @@ class EnigmaTest < Minitest::Test
   def test_other_enigma
     secret = 'shared secret for testing 123'
 
-    enigma1 = Enigma.new(secret)
-    enigma2 = Enigma.new(secret)
+    enigma1 = AionEnigma.new(secret)
+    enigma2 = AionEnigma.new(secret)
 
     message_in        = 'this is a string to encrypt'
     encrypted_message = enigma1.encrypt(message_in)
@@ -61,13 +61,13 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_secret_mismatch
-    enigma1 = Enigma.new('secret 1')
-    enigma2 = Enigma.new('secret 2')
+    enigma1 = AionEnigma.new('secret 1')
+    enigma2 = AionEnigma.new('secret 2')
 
     message_in        = 'testing mismatch'
     encrypted_message = enigma1.encrypt(message_in)
 
-    assert_raises Enigma::DecryptError do
+    assert_raises AionEnigma::DecryptError do
       enigma2.decrypt(encrypted_message)
     end
   end
@@ -76,9 +76,9 @@ class EnigmaTest < Minitest::Test
     secret_message = 'this is a secret message'
     shared_secret  = 'some shared secret'
 
-    enigma = Enigma.new(shared_secret)
+    enigma = AionEnigma.new(shared_secret)
     encrypted_message = enigma.encrypt(secret_message)
-    # encrypted_message ≈> 'Gn3AZKG9aqv+ALTfI9ZbuQ==|7hI5iN1Jdm73zQB1nTBngX07SaX60nuirWQRtNygIgE='
+    # encrypted_message ≈> 'ivBsGDsQjG6ScC5wq7Q-2w~XgFz1c4mdDR_MhI0VkpvNMcINDHCrAXEb1RlzwXpuNU'
 
     message = enigma.decrypt(encrypted_message)
     # message => 'this is a secret message'

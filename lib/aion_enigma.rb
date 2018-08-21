@@ -1,7 +1,7 @@
 require 'openssl'
 require 'base64'
 
-class Enigma
+class AionEnigma
 
   class EncryptError < StandardError; end
   class DecryptError < StandardError; end
@@ -12,7 +12,7 @@ class Enigma
     unless secret.is_a? String
       fail ArgumentError, 'secret must be a string'
     end
-    @key = Digest::SHA1.hexdigest(secret)
+    @key = Digest::SHA2.digest(secret)
   end
 
   # Encrypts a string.
@@ -89,7 +89,7 @@ class Enigma
   # @param encrypted the encrypted bytes
   # @return String with serialized iv and encrypted parameters
   def pack(iv, encrypted)
-    [iv, encrypted].map { |x| Base64.encode64(x).strip }.join('|')
+    [iv, encrypted].map { |x| Base64.urlsafe_encode64(x).gsub('=','') }.join('~')
   end
 
   # Unpacking the encrypted_message into an array of iv and encrypted data.
@@ -103,7 +103,7 @@ class Enigma
   # @param encrypted_message as outputted by Enigma#pack
   # @return Array containing iv bytes and encrypted bytes
   def unpack(encrypted_message)
-    encrypted_message.split('|').map { |m| Base64.decode64(m) }
+    encrypted_message.split('~').map { |m| Base64.urlsafe_decode64(m) }
   end
 
 end
